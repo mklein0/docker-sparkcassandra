@@ -2,7 +2,7 @@ FROM cassandra:3
 
 # Configure cassandra to listen to all rpc
 RUN sed -ri ' \
-		s/^(rpc_address:).*/\1 0.0.0.0/; \
+	s/^(rpc_address:).*/\1 0.0.0.0/; \
 	' "$CASSANDRA_CONFIG/cassandra.yaml"
 
 
@@ -49,7 +49,7 @@ COPY scripts/spark-shell.sh /spark-shell.sh
 COPY scripts/spark-defaults.conf /spark-defaults.conf
 
 RUN sed -ri " \
-             s/spark-cassandra-connector-assembly-1.3.0-RC1-SNAPSHOT.jar/spark-cassandra-connector-${SPARK_CASSANDRA_CONN_VER}.jar/; \
+             s/spark-cassandra-connector-SNAPSHOT.jar/spark-cassandra-connector-${SPARK_CASSANDRA_CONN_VER}.jar/; \
         " /spark-shell.sh
 
 
