@@ -6,5 +6,5 @@ cd $(realpath /usr/local/spark)
 	--conf spark.driver.host=${SPARK_LOCAL_IP} \
 	--properties-file /spark-defaults.conf \
 	--conf spark.cassandra.connection.host=${SPARK_LOCAL_IP} \
-	--jars /spark-cassandra-connector-SNAPSHOT.jar \
+	--jars /spark-cassandra-connector-SNAPSHOT.jar,/jsr166e-1.1.0.jar \
 	"$@"

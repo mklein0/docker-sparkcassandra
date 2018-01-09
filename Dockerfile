@@ -23,6 +23,7 @@ ENV SPARK_WORKER_WEBUI_PORT 8081
 RUN apt-get update && apt-get install -y supervisor wget && mkdir -p /var/log/supervisor
 
 # download from offical repo and install spark
+RUN wget -q http://central.maven.org/maven2/com/twitter/jsr166e/1.1.0/jsr166e-1.1.0.jar
 RUN wget -q http://dl.bintray.com/spark-packages/maven/datastax/spark-cassandra-connector/${SPARK_CASSANDRA_CONN_VER}/spark-cassandra-connector-${SPARK_CASSANDRA_CONN_VER}.jar
 RUN mirror_url=$( \
         wget -q -O - "http://www.apache.org/dyn/closer.cgi/?as_json=1" \
