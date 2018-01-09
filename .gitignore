@@ -1,0 +1,13 @@
+*.pyc
+*.egg
+*.egg-info
+*.dist-info
+.*.swp
+.swp
+*~
+*.bak
+
+.DS_Store
+.idea/
+.ropeproject/
+
