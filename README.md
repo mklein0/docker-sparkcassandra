@@ -8,14 +8,22 @@ https://github.com/clakech/sparkassandra-dockerized.git and https://github.com/s
 * https://docs.docker.com/installation/
 * https://git-scm.com/book/en/v2/Getting-Started-Installing-Git
 
+## Build you Spark + Cassandra docker container
+```
+cd docker-sparkcassandra
+docker build -t mklein0/docker-sparkcassandra .
+```
+
 ## Run your own Spark + Cassandra cluster using Docker!
 
-TODO: Maybe add docker-compose file here.
+```
+docker volume create --name=cstar0-data-volume
+docker volume create --name=cstar1-data-volume
+docker volume create --name=cstar2-data-volume
+docker-compose -f docker-compose.yml up
+```
 
-
-Here you have a Cassandra + Spark cluster running without installing anything but Docker. #cool
-
-## Try your Cassandra cluster
+Here you have a Cassandra + Spark cluster running without installing anything but Docker.
 
 ## Try your Cassandra cluster
 
@@ -23,7 +31,7 @@ To test your Cassandra cluster, you can run a cqlsh console to insert some data:
 
 ```
 # run a Cassandra cqlsh console
-docker run -it --link some-cassandra:cassandra --rm clakech/sparkassandra-dockerized cqlsh cassandra
+docker exec -it cstar0 cqlsh
 
 # create some data and retrieve them:
 cqlsh>CREATE KEYSPACE test WITH replication = {'class': 'SimpleStrategy', 'replication_factor': 1 };
@@ -50,7 +58,7 @@ To test your Spark cluster, you can run a shell to read/write data from/to Cassa
 
 ```
 # run a Spark shell
-docker run -i -t -P --link spark-master:spark-master --link some-cassandra:cassandra clakech/sparkassandra-dockerized /spark-shell.sh
+docker exec -it spark-master /spark-shell.sh
 
 # check you can retrieve your Cassandra data using Spark
 scala> import com.datastax.spark.connector._
